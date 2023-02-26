@@ -17,3 +17,26 @@ impl DerefMut for Speed {
         &mut self.0
     }
 }
+
+impl From<Velocity> for Speed {
+    fn from(velocity: Velocity) -> Self {
+        Self(velocity.length())
+    }
+}
+
+#[derive(Component, Default, Debug)]
+pub struct Velocity(pub Vec3);
+
+impl Deref for Velocity {
+    type Target = Vec3;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl DerefMut for Velocity {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
+}
