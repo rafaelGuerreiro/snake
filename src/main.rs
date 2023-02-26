@@ -1,4 +1,4 @@
-use crate::player::{create_player, input::user_input_move};
+use crate::player::PlayerPlugin;
 use bevy::prelude::*;
 
 pub mod commons;
@@ -7,9 +7,8 @@ pub mod player;
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
-        .add_system(user_input_move)
+        .add_plugin(PlayerPlugin)
         .add_startup_system(setup)
-        .add_startup_system(create_player)
         .run();
 }
 

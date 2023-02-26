@@ -1,7 +1,19 @@
-use crate::{commons::speed::Speed, player::input::UserInput};
+use crate::{
+    commons::speed::Speed,
+    player::input::{UserInput, UserInputPlugin},
+};
 use bevy::{prelude::*, sprite::MaterialMesh2dBundle};
 
 pub mod input;
+
+#[derive(Default)]
+pub struct PlayerPlugin;
+
+impl Plugin for PlayerPlugin {
+    fn build(&self, app: &mut App) {
+        app.add_plugin(UserInputPlugin).add_startup_system(create_player);
+    }
+}
 
 pub fn create_player(
     mut commands: Commands,

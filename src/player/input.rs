@@ -4,6 +4,15 @@ use bevy::prelude::*;
 #[derive(Component, Default)]
 pub struct UserInput;
 
+#[derive(Default)]
+pub struct UserInputPlugin;
+
+impl Plugin for UserInputPlugin {
+    fn build(&self, app: &mut App) {
+        app.add_system(user_input_move);
+    }
+}
+
 pub fn user_input_move(
     input: Res<Input<KeyCode>>,
     time: Res<Time>,
