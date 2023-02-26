@@ -4,6 +4,13 @@ use bevy::prelude::*;
 pub mod commons;
 pub mod player;
 
+#[derive(Debug, Clone, Eq, PartialEq, Hash)]
+enum AppState {
+    MainMenu,
+    InGame,
+    Paused,
+}
+
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins.set(AssetPlugin {
@@ -12,6 +19,7 @@ fn main() {
             watch_for_changes: true,
             ..default()
         }))
+        .add_state(AppState::InGame)
         .add_plugin(PlayerPlugin)
         .add_startup_system(setup)
         .run();

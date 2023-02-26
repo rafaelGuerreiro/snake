@@ -1,4 +1,4 @@
-use crate::commons::speed::Speed;
+use crate::{commons::speed::Speed, AppState};
 use bevy::prelude::*;
 
 #[derive(Component, Default)]
@@ -9,7 +9,7 @@ pub struct UserInputPlugin;
 
 impl Plugin for UserInputPlugin {
     fn build(&self, app: &mut App) {
-        app.add_system(user_input_move);
+        app.add_system_set(SystemSet::on_update(AppState::InGame).with_system(user_input_move));
     }
 }
 

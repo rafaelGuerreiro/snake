@@ -1,6 +1,7 @@
 use crate::{
     commons::speed::Speed,
     player::input::{UserInput, UserInputPlugin},
+    AppState,
 };
 use bevy::{prelude::*, sprite::MaterialMesh2dBundle};
 
@@ -15,8 +16,11 @@ pub struct PlayerPlugin;
 impl Plugin for PlayerPlugin {
     fn build(&self, app: &mut App) {
         app.add_plugin(UserInputPlugin)
-            .add_system_to_stage(CoreStage::PostUpdate, camera_follow_player)
-            .add_startup_system(create_player);
+            .add_system_set(SystemSet::on_enter(AppState::InGame).with_system(create_player))
+            .add_system_set_to_stage(
+                CoreStage::PostUpdate,
+                SystemSet::on_update(AppState::InGame).with_system(camera_follow_player),
+            );
     }
 }
 
